@@ -1,0 +1,20 @@
+
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: . # Contexto de construcción es el directorio actual
+      dockerfile: Dockerfile # Especifica el nombre del Dockerfile
+    container_name: youtube-transcript-fastapi # Nombre descriptivo del contenedor
+    ports:
+      - "8000:8000" # Mapea puerto_host:puerto_contenedor
+    # Carga variables de entorno desde el archivo .env (si existe)
+    # Descomenta la siguiente línea si usas el archivo .env
+    env_file:
+      - .env
+    # Montaje opcional para desarrollo: refleja cambios en 'app' sin reconstruir
+    # Comenta o elimina esta línea para producción si no necesitas live reload
+    # volumes:
+    #   - ./app:/app/app
+    restart: unless-stopped # Política de reinicio
